@@ -30,6 +30,7 @@ module.exports = {
             // },
             injectCss: false, // optional. Inject css text into js file, no need to download `theme-colors-xxx.css` any more.
             isJsUgly: process.env.NODE_ENV !== 'development', // optional. Set to `true` if your js is uglified. Default is set by process.env.NODE_ENV.
+            processedEntries: /edit\.js/, // optional, determine which entries are processed, should be a regular expression
         })
     ],
 }
