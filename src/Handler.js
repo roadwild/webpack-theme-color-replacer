@@ -48,12 +48,13 @@ module.exports = class Handler {
             chunks: false,
             chunkGroups: false
         }
+        var processedEntries = this.options.processedEntries
         var entrypoints = compilation.getStats().toJson(onlyEntrypoints).entrypoints;
         Object.keys(entrypoints).forEach(entryName => {
             var entryAssets = entrypoints[entryName].assets
             for (var i = 0, l = entryAssets.length; i < l; i++) {
                 var assetName = entryAssets[i]
-                if (assetName.slice(-3) === '.js' && assetName.indexOf('manifest.') === -1) { //
+                if (assetName.slice(-3) === '.js' && assetName.indexOf('manifest.') === -1 && (processedEntries ? processedEntries.test(assetName) : true)) { //
                     var assetSource = compilation.assets[assetName]
                     if (assetSource && !assetSource._isThemeJsInjected) {
                         var cSrc = this.getEntryJs(outputName, assetSource, cssCode)
